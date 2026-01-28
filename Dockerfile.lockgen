@@ -1,0 +1,15 @@
+FROM ruby:3.2.2-slim-bookworm
+
+WORKDIR /app
+
+# Copy only Gemfile
+COPY Gemfile ./
+
+# Install bundler
+RUN gem install bundler:2.9.15
+
+# Generate Gemfile.lock
+RUN bundle install
+
+# Keep Gemfile.lock so we can copy it out
+CMD ["ls", "-l"]
